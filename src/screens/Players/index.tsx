@@ -1,4 +1,5 @@
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { useState } from 'react';
+import { FlatList, Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 import { ButtonIcon } from '@components/ButtonIcon';
 import { Filter } from '@components/Filter';
@@ -9,6 +10,9 @@ import { Input } from '@components/Input';
 import * as S from './styles';
 
 export function Players() {
+  const [team, setTeam] = useState('time a');
+  const [players, setPlayers] = useState([]);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <S.Container>
@@ -24,7 +28,22 @@ export function Players() {
           <ButtonIcon icon="add" />
         </S.Form>
 
-        <Filter title="Time A" isActive />
+        <S.HeaderList>
+          <FlatList
+            data={['time a', 'time b']}
+            keyExtractor={item => item}
+            renderItem={({ item }) => (
+              <Filter
+                title={item}
+                isActive={item === team}
+                onPress={() => setTeam(item)}
+              />
+            )}
+            horizontal
+          />
+
+          <S.NumberOfPlayers>{players.length}</S.NumberOfPlayers>
+        </S.HeaderList>
       </S.Container>
     </TouchableWithoutFeedback>
   );
