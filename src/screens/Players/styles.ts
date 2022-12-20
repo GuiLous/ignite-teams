@@ -35,3 +35,7 @@ export const NumberOfPlayers = styled.Text`
     font-size: ${theme.FONT_SIZE.SM}px;
   `}
 `;
+
+export const PlayersListContainer = styled.View`
+  flex: 1;
+`;
